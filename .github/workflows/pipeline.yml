@@ -4,18 +4,18 @@ on: [push]
 env:
   APPLICATION_NAME: app2
 jobs:
-  lint:
+  lint: ##Just one job
     runs-on: ubuntu-18.04
     steps:
     - uses: actions/checkout@v1
     - name: Setup Python environment
-      uses: actions/setup-python@v1.1.1
+      uses: actions/setup-python@v1.1.1 ##This setup the python environment
     - name: Install requirements
       run: pip install --quiet --requirement requirements.txt
     - name: Lint code
-      run: |
+      run: | ##Libraries to checkout the code for errors
         flake8 --ignore=E501,E231 *.py
         pylint --disable=C0301 --disable=C0326 *.py
-    - name: Run unit tests
+    - name: Run unit tests ##Making unit tests
       run: |
         python -m unittest --verbose --failfast
